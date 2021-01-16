@@ -23,6 +23,11 @@ function MyApp() {
     function updateList(person) {
         makePostCall(person).then(result => {
             if (result && result.status === 201) {
+                person = {
+                    'id': result.data.id,
+                    'name': result.data.name,
+                    'job': result.data.job,
+                };
                 setCharacters([...characters, person]);
             }
         });
