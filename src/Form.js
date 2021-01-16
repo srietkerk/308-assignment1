@@ -34,6 +34,7 @@ function Form(props) {
                 id="name"
                 value={person.name}
                 onChange={handleChange} />
+            <label htmlFor="job">Job</label>
             <input
                 type="text"
                 name="job"

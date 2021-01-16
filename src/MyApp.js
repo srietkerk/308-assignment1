@@ -13,11 +13,26 @@ function MyApp() {
         });
     }, [] );
 
-    function removeOneCharacter(index) {
-        const updated = characters.filter((character, i) => {
-            return i !== index
-        });
-        setCharacters(updated);
+    async function removeOneCharacter(index) {
+        try {
+            const id = characters[index].id;
+            const response = await axios.delete('http://localhost:5000/users/' + id);
+            if (response && response.status === 204) {
+                const updated = characters.filter((character, i) => {
+                    return i !== index
+                });
+                setCharacters(updated);
+            }
+            else {
+                console.log('Invalid response: ');
+                console.log(response);
+            }
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+            return false;
+        }
     }
 
     function updateList(person) {
